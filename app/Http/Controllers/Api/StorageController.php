@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StorageResource;
 use App\Models\Storage;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class StorageController extends Controller
      */
     public function index()
     {
-        return Storage::all();
+        return StorageResource::collection(Storage::with('folders')->get());
     }
 
     /**
@@ -37,7 +38,7 @@ class StorageController extends Controller
      */
     public function show($id)
     {
-        return Storage::find($id);
+        return new StorageResource(Storage::with('folders')->findOrFail($id));
     }
 
     /**
