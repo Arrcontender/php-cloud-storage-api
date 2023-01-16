@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Models\File;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FolderResource extends JsonResource
+class FileResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +18,6 @@ class FolderResource extends JsonResource
             'id' => $this->id,
             'created_at' => $this->created_at,
             'name' => $this->name,
-            'files' => FileResource::collection($this->files),
         ];
     }
 }

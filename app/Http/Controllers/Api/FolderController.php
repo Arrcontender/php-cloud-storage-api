@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\StorageResource;
-use App\Models\Storage;
+use App\Http\Requests\FolderStoreRequest;
+use App\Models\Folder;
+use App\Http\Resources\FolderResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class StorageController extends Controller
+class FolderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,7 @@ class StorageController extends Controller
      */
     public function index()
     {
-        return StorageResource::collection(Storage::with('folders')->get());
+        return FolderResource::collection(Folder::with('files')->get());
     }
 
     /**
@@ -25,9 +27,11 @@ class StorageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FolderStoreRequest $request)
     {
+        $created_folder = Folder::create($request->validated());
 
+        return new FolderResource($created_folder);
     }
 
     /**
@@ -38,7 +42,7 @@ class StorageController extends Controller
      */
     public function show($id)
     {
-        return new StorageResource(Storage::with('folders')->findOrFail($id));
+        return new FolderResource(Folder::with('files')->findOrFail($id));
     }
 
     /**
@@ -48,9 +52,11 @@ class StorageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FolderStoreRequest $request, Folder $folder)
     {
-        //
+        $folder->update($request->validated());
+
+        return new FolderResource($folder);
     }
 
     /**
@@ -59,8 +65,10 @@ class StorageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Folder $folder)
     {
-        //
+        $folder->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

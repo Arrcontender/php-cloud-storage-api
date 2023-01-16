@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Folder extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'storage_id'];
+
+    public function files()
+    {
+        return $this->hasMany(File::class);
+    }
 }
