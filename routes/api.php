@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResources(['storage' => StorageController::class]);
 
 Route::apiResources(['folder' => FolderController::class]);
+
+Route::apiResources(['file' => FileController::class]);
+
+Route::get('file/country_list', 'FileController@countryList');
