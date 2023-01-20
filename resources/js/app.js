@@ -5,13 +5,13 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import App from "./components/App.vue"
 import Home from "./components/Home.vue"
-import About from "./components/About.vue"
+import Storage from "./components/storage/Storage.vue"
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {path: '/', name: 'home', component: Home},
-        {path: '/about', name: ' about', component: About}
+        {path: '/storage', name: 'storage', component: Storage},
     ]
 });
 
