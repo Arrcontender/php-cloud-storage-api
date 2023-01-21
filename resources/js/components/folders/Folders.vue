@@ -2,11 +2,11 @@
     <div class="container">
         <h1>Storage</h1>
         <div class="row">
-            <div class="col-lg-4" v-for="storage in storage">
+            <div class="col-lg-4" v-for="folder in folder">
                 <div class="card mt-3">
                     <div class="card-body">
-                        <router-link class="nav-item nav-link" :to="{name: 'showStorage', params: {storageId: storage.id}}">
-                            <h1 style="text-align: center;" class="card-title">STORAGE #{{ storage.id }}</h1>
+                        <router-link class="nav-item nav-link" :to="{name: 'showFolder', params: {folderId: folder.id}}">
+                            <h2 style="text-align: center;" class="card-title">{{ folder.name }}</h2>
                         </router-link>
                     </div>
                 </div>
@@ -27,14 +27,14 @@ import axios from 'axios';
 export default {
     data(){
         return {
-            storage: [],
+            folder: [],
             errored: false,
             loading: true
         }
     },
     mounted(){
-        axios.get('/api/V1/storage').then(response => {
-            this.storage = response.data.data
+        axios.get('/api/V1/folder').then(response => {
+            this.folder = response.data.data
         }).catch(error => {
             console.log(error)
             this.errored = true

@@ -4,7 +4,8 @@
             <div class="container">
                 <div class="navbar-nav">
                     <router-link class="nav-item nav-link" to="/">Home</router-link>
-                    <router-link class="nav-item nav-link" to="/storage">Storage</router-link>
+                    <!-- <router-link class="nav-item nav-link" to="/storage">Storage</router-link> -->
+                    <router-link class="nav-item nav-link" to="/folders">Storage</router-link>
                 </div>
             </div>
         </nav>

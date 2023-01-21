@@ -14,12 +14,8 @@ class FileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function countryList()
-    {
-        return response()->download(public_path('Crosby.jpg'), 'User Image');
-    }
-    public function index()
+    
+     public function index()
     {
         return FileResource::collection(File::all());
     }
