@@ -1,16 +1,10 @@
 <template>
     <div class="container">
         <div class="form-group">
-            <input type="text" @blur="saveName" v-model="name" class="form-control" :class="{ 'is-invalid': $v.name.$error }">
-            <div class="invalid-feedback" v-if="!$v.name.required">
-                Required field!
-            </div>
-            <div class="invalid-feedback" v-if="!$v.name.maxLength">
-                Maximum characters: {{ $v.name.$params.maxLength.max }}
-            </div>
+            <input type="text" @blur="saveName" v-model="name" class="form-control">
         </div>
         <div class="alert alert-danger" role="alert" v-if="errored">
-                Error while change folder name!
+                Field is required!
         </div>
         <div class="spinner-border" style="width: 4rem; height: 4rem;" role="status" v-if="loading">
             <span class="visually-hidden">Loading...</span>
@@ -20,14 +14,12 @@
 
 <script>
 import axios from 'axios';
-import { useVuelidate } from '@vuelidate/core'
-import { required, maxLength } from '@vuelidate/validators'
 
 export default {
     props: [
         'folderId'
     ],
-    data(){
+    data() {
         return {
             name: null,
             errored: false,
@@ -35,10 +27,6 @@ export default {
     },
     methods: {
         saveName(){
-            this.$v.$touch()
-            if(this.$v.$anyError){
-                return;
-            }
             axios.post('/api/V1/folder/'+this.folderId, {
                 _method: 'PUT',
                 name: this.name,
@@ -51,7 +39,7 @@ export default {
         .finally(() => this.loading = false)
         }
     },
-    mounted(){
+    mounted() {
         axios.get('/api/V1/folder/'+this.folderId).then(response => {
             this.name = response.data.data.name
         }).catch(error => {
@@ -60,10 +48,5 @@ export default {
         })
         .finally(() => this.loading = false)
     },
-    validations() {
-        return {
-            name: { required, maxLength: maxLength(255) }
-        }
-    }
 }
 </script>

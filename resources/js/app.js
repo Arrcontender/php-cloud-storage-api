@@ -9,7 +9,6 @@ import Storage from "./components/storage/Storage.vue"
 import ShowStorage from "./components/storage/ShowStorage.vue"
 import Folders from "./components/folders/Folders.vue"
 import ShowFolder from "./components/folders/ShowFolder.vue"
-import Vuelidate from 'vuelidate';
 
 const router = createRouter({
     history: createWebHistory(),

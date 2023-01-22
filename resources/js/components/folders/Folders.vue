@@ -8,6 +8,7 @@
                         <router-link class="nav-item nav-link" :to="{name: 'showFolder', params: {folderId: folder.id}}">
                             <h2 style="text-align: center;" class="card-title">{{ folder.name }}</h2>
                         </router-link>
+                        <button type="button" class="btn btn-danger mt-3" @click="deleteFolder(folder.id)">Delete</button>
                     </div>
                 </div>
             </div>
@@ -32,14 +33,34 @@ export default {
             loading: true
         }
     },
+    methods: {
+        getAllFolders() {
+            axios.get('/api/V1/folder').then(response => {
+                this.folder = response.data.data
+            }).catch(error => {
+                console.log(error)
+                this.errored = true
+            })
+            .finally(() => this.loading = false)
+        },
+        deleteFolder(id) {
+            if(confirm('Are you sure you want to delete folder?')) {
+                axios.post('/api/V1/folder/'+id, {
+                    _method: 'DELETE'
+                })
+                .then(response => {
+                    this.folder = []
+                    this.getAllFolders()
+                }).catch(error => {
+                    console.log(error)
+                    this.errored = true
+                })
+                .finally(() => this.loading = false)
+            }
+        }
+    },
     mounted(){
-        axios.get('/api/V1/folder').then(response => {
-            this.folder = response.data.data
-        }).catch(error => {
-            console.log(error)
-            this.errored = true
-        })
-        .finally(() => this.loading = false)
+        this.getAllFolders()
     }
 }
 </script>
