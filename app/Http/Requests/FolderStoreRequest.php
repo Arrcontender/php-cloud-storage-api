@@ -25,6 +25,7 @@ class FolderStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
+            'storage_id' => 'required'
         ];
     }
 }
