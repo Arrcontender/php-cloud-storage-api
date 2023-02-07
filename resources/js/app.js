@@ -20,8 +20,8 @@ const router = createRouter({
         {path: '/storage/:storageId', name: 'showStorage', component: ShowStorage, props: true},
         {path: '/folders', name: 'folder', component: Folders},
         {path: '/folders/:folderId', name: 'showFolder', component: ShowFolder, props: true},
-        {path: '/register', name: 'register', component: Register},
-        {path: '/login', name: 'login', component: Login},
+        {path: '/users/register', name: 'user.register', component: Register},
+        {path: '/users/login', name: 'user.login', component: Login},
 
     ]
 });
