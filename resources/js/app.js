@@ -9,6 +9,8 @@ import Storage from "./components/storage/Storage.vue"
 import ShowStorage from "./components/storage/ShowStorage.vue"
 import Folders from "./components/folders/Folders.vue"
 import ShowFolder from "./components/folders/ShowFolder.vue"
+import Register from "./components/user/Register.vue"
+import Login from "./components/user/Login.vue"
 
 const router = createRouter({
     history: createWebHistory(),
@@ -18,6 +20,8 @@ const router = createRouter({
         {path: '/storage/:storageId', name: 'showStorage', component: ShowStorage, props: true},
         {path: '/folders', name: 'folder', component: Folders},
         {path: '/folders/:folderId', name: 'showFolder', component: ShowFolder, props: true},
+        {path: '/register', name: 'register', component: Register},
+        {path: '/login', name: 'login', component: Login},
 
     ]
 });
